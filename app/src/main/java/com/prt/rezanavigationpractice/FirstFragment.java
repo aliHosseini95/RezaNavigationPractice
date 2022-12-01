@@ -6,14 +6,28 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.animation.TimeInterpolator;
+import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Property;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.CycleInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +51,7 @@ public class FirstFragment extends Fragment {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -51,7 +66,7 @@ public class FirstFragment extends Fragment {
         //</editor-fold>
 
         //<editor-fold desc="Animation Drawable">
-  /*      AnimationDrawable animationDrawable = (AnimationDrawable) binding.reza.getDrawable();
+/*        AnimationDrawable animationDrawable = (AnimationDrawable) binding.reza.getDrawable();
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,6 +141,91 @@ public class FirstFragment extends Fragment {
                 });
 
                 animatorSet.start();
+            }
+        });*/
+        //</editor-fold>
+
+//        New Animation Lesson
+        //<editor-fold desc="Change background color by objectAnimator">
+     /*   ObjectAnimator animator = ObjectAnimator.ofArgb(binding.buttonFirst, "backgroundColor", Color.RED, Color.BLUE);
+        animator.setDuration(3000);
+        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animator.start();
+            }
+        });*/
+        //</editor-fold>
+
+        //<editor-fold desc="View Animate">
+        /*final float[] visibility = {0f};
+        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.reza.animate().setDuration(2000).alpha(visibility[0]).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        binding.buttonFirst.setEnabled(false);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        if (visibility[0] == 0) {
+                            visibility[0] = 1;
+                        } else {
+                            visibility[0] = 0;
+                        }
+                        binding.buttonFirst.setEnabled(true);
+                    }
+                }).start();
+            }
+        });*/
+        //</editor-fold>
+
+        //<editor-fold desc="Touch Listener">
+        /*binding.buttonFirst.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    binding.reza.setImageResource(R.drawable.ic_launcher_foreground);
+                    return true;
+                }
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    binding.reza.setImageResource(R.drawable.my_animation_drawable);
+                    return true;
+                }
+                return false;
+            }
+        });*/
+        //</editor-fold>
+
+        //<editor-fold desc="Value Animator">
+        /*ValueAnimator animator = ValueAnimator.ofFloat(0, 100);
+        animator.setDuration(3000);
+        animator.setInterpolator(new AnticipateOvershootInterpolator());
+
+        final int[] counter = {0};
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                binding.reza.setRotation((Float) valueAnimator.getAnimatedValue());
+                binding.buttonFirst.setText(String.valueOf((Float) valueAnimator.getAnimatedValue()));
+                counter[0]++;
+            }
+        });
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                Log.d("TEST_TAG", String.valueOf(counter[0]));
+            }
+        });
+        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animator.start();
             }
         });*/
         //</editor-fold>
